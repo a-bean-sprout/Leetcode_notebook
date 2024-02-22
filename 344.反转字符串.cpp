@@ -13,7 +13,21 @@ class Solution {
 public:
     void reverseString(vector<char>& s) {
         
+        // 参数检查
+        if(s.empty()){
+            return;
+        }
+
+        // for循环，双指针交换元素
+        for(int i =0; i < s.size()/2; ++i){
+            swap(s[i],s[s.size()-1-i]);
+        }
+
+        return;
     }
 };
 // @lc code=end
+
+// 笔记
+// 
 
