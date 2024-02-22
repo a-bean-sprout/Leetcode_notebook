@@ -4,6 +4,10 @@
  * [15] 三数之和
  */
 
+#include<vector>
+#include<unordered_map>
+using namespace std;
+
 // @lc code=start
 class Solution {
 public:
