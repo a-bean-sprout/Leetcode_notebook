@@ -19,8 +19,11 @@ public:
         }
 
         // for循环，双指针交换元素
-        for(int i =0; i < s.size()/2; ++i){
-            swap(s[i],s[s.size()-1-i]);
+        // for(int i =0; i < s.size()/2; ++i){
+        //     swap(s[i],s[s.size()-1-i]);
+        // }
+        for(int i = 0, j = s.size()-1; i <j ; i++,j--){
+            swap(s[i],s[j]);
         }
 
         return;
