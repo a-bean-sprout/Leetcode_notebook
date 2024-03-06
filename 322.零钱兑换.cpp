@@ -19,9 +19,6 @@ public:
         // 构建DP数组 & 确定下标含义
         vector<int> dp(amount+1, amount+1);
 
-        // 初始化
-        dp[0] = 0;
-
         // 递归公式
         // dp[i][j] = min(dp[i-1][j], dp[i][j-coins[i]]+1)
         // dp[j] = min(dp[j], dp[j-coins[i]]+1)
@@ -30,6 +27,9 @@ public:
                 dp[j] = min(dp[j], dp[j-coins[i]] + 1);
             }
         }
+
+        // 初始化
+        dp[0] = 0;
 
         // 返回
         return dp[amount] > amount ? -1 : dp[amount];
