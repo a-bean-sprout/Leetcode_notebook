@@ -11,12 +11,21 @@ using namespace std;
 class Solution {
 public:
     int maxSubArray(vector<int>& nums) {
+        if(nums.empty()){
+            return 0;
+        }
 
+        vector<int> dp(nums.size(), 0);
+        dp[0] = nums[0];
+
+        int result = nums[0];
+        for(int i = 1; i < dp.size(); ++i){
+            dp[i] = max(dp[i-1]+nums[i], nums[i]);
+            result = max(result, dp[i]);
+        }
+
+        return result;
     }
 };
 // @lc code=end
 
-
-// 笔记
-// 思路：暴力的方法其实就是取子序列，求和去最大值。可以使用暴力循环。
-// 建议使用贪心算法：
