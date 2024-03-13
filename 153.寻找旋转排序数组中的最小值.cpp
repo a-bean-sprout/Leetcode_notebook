@@ -17,13 +17,19 @@ public:
         }
 
         int left = 0, right = nums.size() -1;
+        int result;
         while(left <= right){
             int mid = (left + right) / 2;
 
-            if(nums[0] <= nums[mid]){ // 左边升序
-
+            if(nums[mid] <= nums.back()){ // 右边递增区间
+                result = nums[mid];
+                right = mid - 1;
+            }else {
+                left = mid + 1;
             }
         }
+
+        return result;
     }
 };
 // @lc code=end

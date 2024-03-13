@@ -16,26 +16,27 @@ public:
             return 0;
         }
 
-        if(nums.back() < target){
-            return nums.size();
-        }
+        int left = 0;
+        int right = nums.size() -1;
 
-        int begin = 0;
-        int end = nums.size() -1;
+        int result = nums.size();
+        while(left <= right){
+            int mid = (left + right) / 2;
 
-        while(begin < end){  // 目标：大于目标值的第一个元素
-            int middle = (begin + end) / 2;
-
-            if(nums[middle] < target){
-                begin = middle + 1;
-            }else if(nums[middle] > target){
-                end = middle;
+            if(nums[mid] == target){
+                result = mid;
+                right = mid - 1;
+            }else if (target < nums[mid]){
+                result = mid;
+                right = mid - 1;
             }else{
-                return middle;
+                left = mid + 1;
             }
         }
 
-        return begin;
+
+
+        return result;
     }
 };
 // @lc code=end

@@ -11,6 +11,23 @@ using namespace std;
 // @lc code=start
 class Solution {
 public:
+    int fun(vector<int>& nums, int target, int left, int right){
+        while(left <= right){
+            int mid = (left + right) / 2;
+
+            if(nums[mid] == target){
+                return mid;
+            }
+
+            if(nums[mid] < target){
+                left = mid + 1;
+            }else{
+                right = mid - 1;
+            }
+        }
+
+        return -1;
+    }
 
     int search(vector<int>& nums, int target) {
         if(nums.empty()){
@@ -20,23 +37,25 @@ public:
         int left = 0, right = nums.size() - 1;
         while(left <= right){
             int mid = (left + right) / 2;
+
             if(nums[mid] == target){
                 return mid;
             }
 
-            if(nums[0] <= nums[mid]){ // 升序
-                if(nums[0] <= target && target < nums[mid]){
-                    right = mid - 1;
+            if(nums[mid] < nums[right]){ // 右部分有序
+                if(nums[mid] < target && target <= nums[right]){
+                    return fun(nums,target, mid+1, right);
                 }else{
-                    left = mid + 1;
+                    right = mid - 1;
                 }
             }else{
-                if(nums[mid] < target && target <= nums.back()){
-                    left = mid + 1;
+                if(nums[left] <= target && target < nums[mid]){
+                    return fun(nums, target, left, mid-1);
                 }else{
-                    right = mid - 1;
+                    left = mid + 1;
                 }
             }
+
         }
 
         return -1;

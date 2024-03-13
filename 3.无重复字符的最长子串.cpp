@@ -3,6 +3,8 @@
  *
  * [3] 无重复字符的最长子串
  */
+#include<string>
+using namespace std;
 
 // @lc code=start
 class Solution {
