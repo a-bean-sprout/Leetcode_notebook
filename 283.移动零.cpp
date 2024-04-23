@@ -14,11 +14,11 @@ public:
     void moveZeroes(vector<int>& nums) {
         // 参数检验
 
-        int index = 0;
+        // [0-slow):非0 && [slow, i):0
+        int slow = 0;
         for(int i = 0; i < nums.size(); ++i){
             if(nums[i] != 0){
-                swap(nums[i], nums[index]);
-                index++;
+                swap(nums[i], nums[slow++]);
             }
         }
     }

@@ -33,40 +33,17 @@ using namespace std;
 
 class Solution {
 public:
-    void traversal(TreeNode* cur, vector<int>& res){
-        // 递归出口
-        if(cur == nullptr) return;
-
-        traversal(cur->left, res);
-        res.push_back(cur->val);
-        traversal(cur->right, res);
-
-        return;
-    }
-
-
+    long long maxVal = LONG_MIN; // 因为后台测试数据中有int最小值
     bool isValidBST(TreeNode* root) {
-        // 参数检验
-        if(root == nullptr){
-            return false;
-        }
+        if (root == NULL) return true;
 
-        // 递归：返回数组
-        vector<int> res;
-        traversal(root, res);
+        bool left = isValidBST(root->left);
+        // 中序遍历，验证遍历的元素是不是从小到大
+        if (maxVal < root->val) maxVal = root->val;
+        else return false;
+        bool right = isValidBST(root->right);
 
-        // 遍历 res
-        if(res.size() == 1){
-            return true;
-        }
-        for(int i =0 ; i < res.size()-1; ++i){
-            if(res[i] >= res[i+1]){
-                return false;
-            }
-        }
-
-        // 返回
-        return true;
+        return left && right;
     }
 };
 // @lc code=end
