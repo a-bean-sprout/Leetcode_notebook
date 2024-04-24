@@ -42,20 +42,21 @@ public:
                 return mid;
             }
 
-            if(nums[mid] < nums[right]){ // 右部分有序
-                if(nums[mid] < target && target <= nums[right]){
-                    return fun(nums,target, mid+1, right);
+            // 二分后，mid会落到左侧或右侧，按此情况分开讨论
+            if(nums[0] <= nums[mid]){   // 左侧有序
+                if(nums[0] <= target && target < nums[mid]){
+                    right = mid - 1;
+                }else {
+                    left = mid + 1;
+                }
+
+            } else {
+                if(nums[mid] < target && target <= nums[nums.size()-1]){
+                    left = mid + 1;
                 }else{
                     right = mid - 1;
                 }
-            }else{
-                if(nums[left] <= target && target < nums[mid]){
-                    return fun(nums, target, left, mid-1);
-                }else{
-                    left = mid + 1;
-                }
             }
-
         }
 
         return -1;
