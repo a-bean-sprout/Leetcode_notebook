@@ -16,6 +16,8 @@ public:
             return "";
         }
 
+        // 思路：若判断dp[i][j]，则需根据dp[i+1][j-1]。也就是左下方需要先赋值。
+
         // 动态规划
         vector<vector<bool>> dp(s.size(), vector<bool>(s.size(), false));
         int maxLen = 0;

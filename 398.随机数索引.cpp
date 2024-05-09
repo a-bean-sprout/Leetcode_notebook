@@ -25,6 +25,7 @@ public:
                 if(random() % ++count == 0){
                     result = i;
                 }
+                // 1/k * k/k+1 * k+1/k+2 ... = 1/n
             }
         }
 

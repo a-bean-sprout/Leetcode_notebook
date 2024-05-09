@@ -4,6 +4,9 @@
  * [64] 最小路径和
  */
 
+#include<vector>
+using namespace std;
+
 // @lc code=start
 class Solution {
 public:
@@ -12,21 +15,43 @@ public:
             return 0;
         }
         int rows = grid.size(), columns = grid[0].size();
-        auto dp = vector < vector <int> > (rows, vector <int> (columns));
-        dp[0][0] = grid[0][0];
-        for (int i = 1; i < rows; i++) {
-            dp[i][0] = dp[i - 1][0] + grid[i][0];
+
+        // 空间复杂度优化
+        vector<int> dp(columns, grid[0][0]);
+
+        // 初始化DP数组
+        for(int j = 1; j < columns; ++j){
+            dp[j] = dp[j-1] + grid[0][j];
         }
-        for (int j = 1; j < columns; j++) {
-            dp[0][j] = dp[0][j - 1] + grid[0][j];
-        }
-        for (int i = 1; i < rows; i++) {
-            for (int j = 1; j < columns; j++) {
-                dp[i][j] = min(dp[i - 1][j], dp[i][j - 1]) + grid[i][j];
+
+        for(int i = 1; i < rows; ++i){
+            dp[0] = dp[0] + grid[i][0]; // 第一列
+
+            for(int j = 1; j < columns; ++j){
+                dp[j] = min(dp[j], dp[j-1]) + grid[i][j];
             }
         }
-        return dp[rows - 1][columns - 1];
+
+        return dp.back();
+        
+        // auto dp = vector < vector <int> > (rows, vector <int> (columns));
+        // dp[0][0] = grid[0][0];
+        // for (int i = 1; i < rows; i++) {
+        //     dp[i][0] = dp[i - 1][0] + grid[i][0];
+        // }
+        // for (int j = 1; j < columns; j++) {
+        //     dp[0][j] = dp[0][j - 1] + grid[0][j];
+        // }
+        // for (int i = 1; i < rows; i++) {
+        //     for (int j = 1; j < columns; j++) {
+        //         dp[i][j] = min(dp[i - 1][j], dp[i][j - 1]) + grid[i][j];
+        //     }
+        // }
+        // return dp[rows - 1][columns - 1];
     }
 };
+// 递推公式：dp[i][j] = min(dp[i-1][j], dp[i][j-1]) + grid[i][j]
+// 滚动数组：dp[j] = min(dp[j], dp[j-1]) + grid[i][j]
+
 // @lc code=end
 
